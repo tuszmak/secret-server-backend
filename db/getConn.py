@@ -7,6 +7,7 @@ def getConn(envVariables : dict):
               host=envVariables.get('DB_HOST'),
               database=envVariables.get('DB_NAME'),
               user=envVariables.get('DB_USERNAME'),
-              password=envVariables.get('DB_PASSWORD')
+              password=envVariables.get('DB_PASSWORD'),
+              port=envVariables.get("DB_PORT")
               )
     return conn
