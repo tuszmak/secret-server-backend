@@ -30,7 +30,11 @@ def getSecretByHash():
     
 @app.post("/api/v1/init")
 def init_db():
-    init(envVariables)
+    try:
+        init(envVariables)
+        return Response("Init A-OK!", status=200, mimetype='text/html')
+    except Exception as e:
+        return Response(str(e), status=400, mimetype='application/json')
 
 if(__name__ == '__main__'):
     app.run(debug=True, port=envVariables.get("PORT",5000))
