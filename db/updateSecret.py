@@ -1,0 +1,2 @@
+def updateSecret(secret):
+    print()
