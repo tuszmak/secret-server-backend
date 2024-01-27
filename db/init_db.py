@@ -11,14 +11,19 @@ def init(envVariables):
         cur = conn.cursor()
         
         # Execute a command: this creates a new table
-        cur.execute('CREATE TABLE IF NOT EXISTS secrets (id serial PRIMARY KEY,'
-                                         'link varchar (150) NOT NULL,'
-                                         'secret varchar (150) NOT NULL,'
-                                         'rem_visits integer NOT NULL,'
-                                         'expiry_date timestamp NOT NULL);'
-                                         )
-        
-        
-        conn.commit()
+        try:
+         
+    # Execute the CREATE TABLE statement
+         cur.execute('CREATE TABLE IF NOT EXISTS secrets (id serial PRIMARY KEY,'
+                'hash varchar (150) NOT NULL,'
+                'secret_text varchar (150) NOT NULL,'
+                'created_at timestamp NOT NULL,'
+                'expires_at timestamp NOT NULL,'
+                'remaining_views integer NOT NULL);')
+    # Commit the changes
+         conn.commit()
+         print("Table created successfully.")
+        except Exception as e:
+                print(f"Error: {e}")
         cur.close()
         

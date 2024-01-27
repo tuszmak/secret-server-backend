@@ -1,4 +1,5 @@
 import traceback
+from datetime import datetime
 from model import SecretData
 from .getConn import getConn
 from encrypt import generateLink, encryptSecret
@@ -11,7 +12,7 @@ def createSecret(data: SecretData, envVariables):
         link = generateLink()
         try:
                 with conn.cursor() as cur:
-                        cur.execute(insert_query, (link, encryptSecret(data.text), data.numberOfVisits, data.expDate))
+                        cur.execute(insert_query, (link, encryptSecret(data.text), datetime.now(), data.expDate, data.numberOfVisits))
                         conn.commit() 
         except Exception:
                 raise
