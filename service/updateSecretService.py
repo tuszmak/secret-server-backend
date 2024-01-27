@@ -10,6 +10,5 @@ def update_secret(secret: SecretDao, envVariables):
         else:
             delete_secret(secret.hash, envVariables)
     except:
-        raise
         raise Exception("Can't update the secret")
 
