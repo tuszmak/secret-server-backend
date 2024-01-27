@@ -1,6 +1,6 @@
 from .getConn import getConn
 from .queries import deleteQuery
-def delete_secret_from_db(secret, envVariables):
+def delete_secret_from_db(hash, envVariables):
     conn = getConn(envVariables)
     cur = conn.cursor()
     try:
