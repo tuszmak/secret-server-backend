@@ -1,8 +1,9 @@
 from datetime import datetime
-def check_secret(secret):
-    return check_time(secret[4]) and check_visit_number(3)
+from model import SecretDao
+def check_secret(secret: SecretDao):
+    return check_time(secret.expires_at) and check_visit_number(secret.remainingViews)
 
-def check_time(time):
+def check_time(time: datetime):
     return time < datetime.now()
 def check_visit_number(number):
     return number > 0
