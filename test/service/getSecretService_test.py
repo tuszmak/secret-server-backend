@@ -20,6 +20,7 @@ class Test_Get_Secret_Service():
                 mock_dao.assert_called_once()
                 mock_update.assert_called()
                 mock_decrypt.assert_called_once()
+                
     def test_fail(self):
         with patch(
         "service.getSecretService.getSecretFromDb"
