@@ -17,7 +17,7 @@ def createSecretEndpoint():
         link = createSecretService.create_secret_dao(data, envVariables)
         return Response(link, status=200, mimetype='text/html')
     except Exception as e:
-        return Response(str(e), status=400, mimetype='text/html')  
+        return Response(str(e), status=405, mimetype='text/html')  
 
 @app.post("/api/v1/getSecret")
 def getSecretByHash():
@@ -26,7 +26,7 @@ def getSecretByHash():
         secret = getSecretService.get_secret_by_hash(data.get("hash"), envVariables)
         return Response(json.dumps(secret), status=200, mimetype='application/json')
     except Exception as e:
-        return Response(str(e), status=400, mimetype='application/json')
+        return Response(str(e), status=404, mimetype='application/json')
     
 @app.post("/api/v1/init")
 def init_db():
