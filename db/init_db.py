@@ -16,10 +16,10 @@ def init(envVariables):
     # Execute the CREATE TABLE statement
          cur.execute('CREATE TABLE IF NOT EXISTS secrets (id serial PRIMARY KEY,'
                 'hash varchar (150) NOT NULL,'
-                'secret_text varchar (150) NOT NULL,'
-                'created_at timestamp NOT NULL,'
-                'expires_at timestamp NOT NULL,'
-                'remaining_views integer NOT NULL);')
+                'secretText varchar (150) NOT NULL,'
+                'createdAt timestamp NOT NULL,'
+                'expiresAt timestamp NOT NULL,'
+                'remainingViews integer NOT NULL);')
     # Commit the changes
          conn.commit()
          print("Table created successfully.")
