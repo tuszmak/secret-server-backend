@@ -19,16 +19,15 @@ def create_secret_endpoint():
     except Exception as e:
         return Response(str(e), status=405, mimetype='text/html')  
 
-@app.post("/api/v1/getSecret")
-def get_secret_by_hash():
+@app.get("/api/v1/secret/<hash>")
+def get_secret_by_hash(hash):
     """Get secret from database by hash"""
-    data : dict = json.loads(request.data.decode())
     try:
-        secret = get_secret_service.get_secret_by_hash(data.get("hash"), envVariables)
-        return Response(json.dumps(secret), status=200, mimetype='application/json')
+        secret = get_secret_service.get_secret_by_hash(hash, envVariables)
+        return Response(json.dumps(secret, indent=4, sort_keys=True, default=str), status=200, mimetype='application/json')
     except Exception as e:
         return Response(str(e), status=404, mimetype='application/json')    
-@app.post("/api/v1/init")
+@app.get("/api/v1/init")
 def init_db():
     """Initialize database table"""
     try:

@@ -1,1 +1,1 @@
-from .utils import to_secret_dao
+from .utils import to_secret_dao, to_secret_dto

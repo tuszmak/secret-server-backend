@@ -9,7 +9,7 @@ class TestUpdate_secret_service():
            ) as mock_update,patch(
                "service.update_secret_service.check_secret", return_value=True
                ) as mock_check:
-              update_secret(None,None)
+              update_secret({"hash": "foo"},None)
               mock_check.assert_called_once()
               mock_update.assert_called_once()
 

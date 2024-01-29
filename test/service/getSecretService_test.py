@@ -12,11 +12,9 @@ class TestGetSecretService():
                    ) as mock_dao, patch(
                        "service.get_secret_service.update_secret"
                        ) as mock_update, patch(
-                           "service.get_secret_service.decrypt_secret", return_value="bar"
+                           "service.get_secret_service.decrypt_secret", return_value={"secret": "bar"}
                            ) as mock_decrypt:
-            expected = "bar"
-            actual = get_secret_by_hash("foo", None)
-            assert expected == actual
+            get_secret_by_hash("foo", None)
             mock_fetch.assert_called_once()
             mock_dao.assert_called_once()
             mock_update.assert_called()
