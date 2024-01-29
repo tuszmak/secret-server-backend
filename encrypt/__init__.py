@@ -1,1 +1,1 @@
-from .encryption import encryptSecret,decryptSecret,generateLink
+from .encryption import encrypt_secret,decrypt_secret,generate_link
