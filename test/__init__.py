@@ -1,2 +1,2 @@
-from .service import createSecretService_test
+from .service import create_secret_service_test
 from .encrypt import encryption_test

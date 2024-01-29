@@ -1,35 +1,36 @@
-
 import json
-from flask import Flask, Response, request
-from service import createSecretService, getSecretService
-from dotenv import load_dotenv
-from db import init
 import os
+from dotenv import load_dotenv
+from flask import Flask, Response, request
+from service import create_secret_service, get_secret_service
+from db import init
 
 app = Flask(__name__)
 load_dotenv(".env")
 envVariables = dict(os.environ)
 
 @app.post("/api/v1/secret")
-def createSecretEndpoint():
+def create_secret_endpoint():
+    """Create secret from frontend data"""
     data = json.loads(request.data.decode()) #This is a dictionary. 
     try:
-        link = createSecretService.create_secret_dao(data, envVariables)
+        link = create_secret_service.create_secret_dao(data, envVariables)
         return Response(link, status=200, mimetype='text/html')
     except Exception as e:
         return Response(str(e), status=405, mimetype='text/html')  
 
 @app.post("/api/v1/getSecret")
-def getSecretByHash():
+def get_secret_by_hash():
+    """Get secret from database by hash"""
     data : dict = json.loads(request.data.decode())
     try:
-        secret = getSecretService.get_secret_by_hash(data.get("hash"), envVariables)
+        secret = get_secret_service.get_secret_by_hash(data.get("hash"), envVariables)
         return Response(json.dumps(secret), status=200, mimetype='application/json')
     except Exception as e:
-        return Response(str(e), status=404, mimetype='application/json')
-    
+        return Response(str(e), status=404, mimetype='application/json')    
 @app.post("/api/v1/init")
 def init_db():
+    """Initialize database table"""
     try:
         init(envVariables)
         return Response("Init A-OK!", status=200, mimetype='text/html')
