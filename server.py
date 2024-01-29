@@ -24,7 +24,7 @@ def get_secret_by_hash(hash):
     """Get secret from database by hash"""
     try:
         secret = get_secret_service.get_secret_by_hash(hash, envVariables)
-        return Response(json.dumps(secret), status=200, mimetype='application/json')
+        return Response(json.dumps(secret, indent=4, sort_keys=True, default=str), status=200, mimetype='application/json')
     except Exception as e:
         return Response(str(e), status=404, mimetype='application/json')    
 @app.get("/api/v1/init")
