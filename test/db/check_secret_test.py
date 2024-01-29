@@ -32,9 +32,10 @@ class TestCheckSecret():
         expected = False
         actual = check_secret(foo)
         assert expected == actual
-        
+
     def test_check_when_visit_is_zero(self):
         foo = SecretDao(2,"foo","foo",datetime.now(), datetime(2055,5,5,2,2,0),0)
         expected = False
         actual = check_secret(foo)
         assert expected == actual
+        
