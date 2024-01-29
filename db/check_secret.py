@@ -13,4 +13,4 @@ def check_time(time: datetime):
     return time > datetime.now()
 def check_visit_number(number):
     """Check if you can still visit the secret"""
-    return number > 0
+    return number > 1
