@@ -14,7 +14,7 @@ def create_secret(data: SecretData, env_variables):
     link = generate_link()
     with conn.cursor() as cur:
 
-        cur.execute(INSERT_QUERY, (link, encrypt_secret(data.text), datetime.now(), data.expDate, data.numberOfVisits))
+        cur.execute(INSERT_QUERY, (link, encrypt_secret(data.text), datetime.utcnow(), data.expDate, data.numberOfVisits))
         conn.commit()
     return link
         
