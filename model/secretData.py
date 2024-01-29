@@ -5,4 +5,4 @@ from dataclasses import dataclass
 class SecretData:
     text:str
     numberOfVisits:int
-    expDate:datetime
+    expDate:str

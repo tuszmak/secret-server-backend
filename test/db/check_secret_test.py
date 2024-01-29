@@ -10,12 +10,6 @@ class TestCheckSecret():
         actual = check_secret(foo)
         assert expected == actual
 
-    def test_check_when_visit_is_zero(self):
-        foo = SecretDao(2,"foo","foo",datetime.now(), datetime(2055,5,5,2,2,0),0)
-        expected = False
-        actual = check_secret(foo)
-        assert expected == actual
-
     def test_check_when_all_good(self):
         foo = SecretDao(2,"foo","foo",datetime.now(), datetime(2055,5,5,2,2,0),5)
         expected = True
@@ -26,3 +20,22 @@ class TestCheckSecret():
         with pytest.raises(Exception) as exc_info:
             check_secret(None)
             assert exc_info == "No data given"
+
+    def test_when_only_two_visit_allowed(self):
+        foo = SecretDao(2,"foo","foo",datetime.now(), datetime(2055,5,5,2,2,0),2)
+        expected = True
+        actual = check_secret(foo)
+        assert expected == actual
+
+    def test_when_last_visit(self):
+        foo = SecretDao(2,"foo","foo",datetime.now(), datetime(2055,5,5,2,2,0),1)
+        expected = False
+        actual = check_secret(foo)
+        assert expected == actual
+
+    def test_check_when_visit_is_zero(self):
+        foo = SecretDao(2,"foo","foo",datetime.now(), datetime(2055,5,5,2,2,0),0)
+        expected = False
+        actual = check_secret(foo)
+        assert expected == actual
+        
